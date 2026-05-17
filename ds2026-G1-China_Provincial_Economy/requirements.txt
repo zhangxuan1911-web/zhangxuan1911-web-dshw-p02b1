@@ -1,0 +1,11 @@
+pandas
+numpy
+matplotlib
+seaborn
+openpyxl
+jupyter
+ipykernel
+nbformat
+akshare
+folium
+plotly

@@ -1,0 +1,696 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>中国各省GDP排名动态变化 (2011-2024)</title>
+<script src="https://cdn.amcharts.com/lib/5/index.js"></script>
+<script src="https://cdn.amcharts.com/lib/5/xy.js"></script>
+<script src="https://cdn.amcharts.com/lib/5/themes/Animated.js"></script>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { background: #F5F0EB; font-family: "Microsoft YaHei", "PingFang SC", "Noto Sans SC", sans-serif; }
+  .header { text-align: center; padding: 28px 20px 8px; }
+  .header h1 { font-size: 24px; color: #4a5b6b; font-weight: 600; letter-spacing: 1px; }
+  .header p { font-size: 13px; color: #8899aa; margin-top: 6px; }
+  #chartdiv { width: 100%; height: 680px; }
+  @media (max-width: 768px) {
+    .header h1 { font-size: 18px; }
+    #chartdiv { height: 500px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <h1>中国各省GDP排名动态变化</h1>
+  <p>2011 — 2024 &nbsp;|&nbsp; 单位：亿元 &nbsp;|&nbsp; 显示前 15 名</p>
+</div>
+<div id="chartdiv"></div>
+
+<script>
+var allData = {
+  "2011": {
+    "上海": 20406.1,
+    "云南": 9666.2,
+    "内蒙古": 9610.8,
+    "北京": 17653.3,
+    "吉林": 7857.7,
+    "四川": 21313.1,
+    "天津": 8240.8,
+    "宁夏": 1959.3,
+    "安徽": 16532.7,
+    "山东": 39622.0,
+    "山西": 11005.1,
+    "广东": 54009.6,
+    "广西": 10472.7,
+    "新疆": 6607.6,
+    "江苏": 49689.5,
+    "江西": 11717.4,
+    "河北": 21711.7,
+    "河南": 26212.2,
+    "浙江": 32353.1,
+    "海南": 2525.1,
+    "湖北": 20228.3,
+    "湖南": 19176.4,
+    "甘肃": 4880.7,
+    "福建": 18195.2,
+    "西藏": 620.8,
+    "贵州": 5690.5,
+    "辽宁": 16585.3,
+    "重庆": 10314.1,
+    "陕西": 12320.1,
+    "青海": 1388.3,
+    "黑龙江": 10074.0
+  },
+  "2012": {
+    "上海": 21774.9,
+    "云南": 11266.3,
+    "内蒙古": 10638.9,
+    "北京": 19568.3,
+    "吉林": 8831.3,
+    "四川": 24224.9,
+    "天津": 9193.0,
+    "宁夏": 2162.0,
+    "安徽": 18613.7,
+    "山东": 43584.3,
+    "山西": 11819.7,
+    "广东": 58057.6,
+    "广西": 11496.6,
+    "新疆": 7499.5,
+    "江苏": 54658.4,
+    "江西": 12952.8,
+    "河北": 23437.3,
+    "河南": 28878.5,
+    "浙江": 34978.5,
+    "海南": 2863.6,
+    "湖北": 22921.0,
+    "湖南": 21513.7,
+    "甘肃": 5469.1,
+    "福建": 20510.8,
+    "西藏": 721.1,
+    "贵州": 6828.1,
+    "辽宁": 18127.6,
+    "重庆": 11797.8,
+    "陕西": 14311.5,
+    "青海": 1547.9,
+    "黑龙江": 11171.0
+  },
+  "2013": {
+    "上海": 23809.4,
+    "云南": 13027.0,
+    "内蒙古": 11584.9,
+    "北京": 21746.0,
+    "吉林": 9608.6,
+    "四川": 26858.4,
+    "天津": 10075.2,
+    "宁夏": 2364.9,
+    "安徽": 20888.2,
+    "山东": 48058.1,
+    "山西": 12171.8,
+    "广东": 63757.3,
+    "广西": 12680.6,
+    "新疆": 8518.4,
+    "江苏": 60505.2,
+    "江西": 14473.4,
+    "河北": 24659.1,
+    "河南": 31621.4,
+    "浙江": 38023.3,
+    "海南": 3201.9,
+    "湖北": 25851.7,
+    "湖南": 23916.3,
+    "甘肃": 6108.3,
+    "福建": 22851.7,
+    "西藏": 840.3,
+    "贵州": 8079.9,
+    "辽宁": 19534.3,
+    "重庆": 13275.8,
+    "陕西": 16106.3,
+    "青海": 1736.1,
+    "黑龙江": 12017.0
+  },
+  "2014": {
+    "上海": 25964.5,
+    "云南": 14275.1,
+    "内蒙古": 12377.3,
+    "北京": 23577.5,
+    "吉林": 10077.0,
+    "四川": 29357.5,
+    "天津": 10749.2,
+    "宁夏": 2516.4,
+    "安徽": 22880.7,
+    "山东": 51552.7,
+    "山西": 12307.0,
+    "广东": 69593.4,
+    "广西": 13856.7,
+    "新疆": 9400.2,
+    "江苏": 66228.3,
+    "江西": 15858.6,
+    "河北": 25644.1,
+    "河南": 34611.2,
+    "浙江": 40744.1,
+    "海南": 3541.2,
+    "湖北": 28805.9,
+    "湖南": 26309.1,
+    "甘肃": 6629.4,
+    "福建": 25329.4,
+    "西藏": 954.8,
+    "贵州": 9297.5,
+    "辽宁": 20381.5,
+    "重庆": 14911.7,
+    "陕西": 17635.6,
+    "青海": 1875.1,
+    "黑龙江": 12357.1
+  },
+  "2015": {
+    "上海": 27821.6,
+    "云南": 15358.6,
+    "内蒙古": 13062.7,
+    "北京": 26034.1,
+    "吉林": 10162.9,
+    "四川": 30829.1,
+    "天津": 10889.2,
+    "宁夏": 2644.7,
+    "安徽": 24142.7,
+    "山东": 56159.1,
+    "山西": 12036.1,
+    "广东": 75820.8,
+    "广西": 15030.2,
+    "新疆": 9545.7,
+    "江苏": 71876.0,
+    "江西": 17031.1,
+    "河北": 26744.1,
+    "河南": 36798.2,
+    "浙江": 44222.0,
+    "海南": 3782.7,
+    "湖北": 30661.6,
+    "湖南": 28811.7,
+    "甘肃": 6793.4,
+    "福建": 27307.5,
+    "西藏": 1063.6,
+    "贵州": 10887.1,
+    "辽宁": 20657.8,
+    "重庆": 16305.9,
+    "陕西": 18188.3,
+    "青海": 2054.3,
+    "黑龙江": 12023.2
+  },
+  "2016": {
+    "上海": 30963.9,
+    "云南": 16773.6,
+    "内蒙古": 13879.0,
+    "北京": 28438.7,
+    "吉林": 10603.5,
+    "四川": 33879.2,
+    "天津": 11487.0,
+    "宁夏": 2853.3,
+    "安徽": 26801.2,
+    "山东": 59702.6,
+    "山西": 12160.1,
+    "广东": 83493.4,
+    "广西": 16417.2,
+    "新疆": 9913.9,
+    "江苏": 78261.2,
+    "江西": 18761.2,
+    "河北": 28879.7,
+    "河南": 40167.7,
+    "浙江": 48095.8,
+    "海南": 4151.0,
+    "湖北": 33767.6,
+    "湖南": 31225.0,
+    "甘肃": 7207.1,
+    "福建": 30199.2,
+    "西藏": 1197.4,
+    "贵州": 12133.9,
+    "辽宁": 20832.0,
+    "重庆": 18271.1,
+    "陕西": 19354.6,
+    "青海": 2310.7,
+    "黑龙江": 12280.9
+  },
+  "2017": {
+    "上海": 34378.3,
+    "云南": 18864.6,
+    "内蒙古": 15009.9,
+    "北京": 31325.9,
+    "吉林": 11083.0,
+    "四川": 38517.1,
+    "天津": 12468.2,
+    "宁夏": 3271.6,
+    "安徽": 30141.8,
+    "山东": 63958.6,
+    "山西": 14679.1,
+    "广东": 93004.8,
+    "广西": 18071.7,
+    "新疆": 11460.8,
+    "江苏": 86512.9,
+    "江西": 20497.6,
+    "河北": 31065.5,
+    "河南": 44586.5,
+    "浙江": 53135.2,
+    "海南": 4552.9,
+    "湖北": 37624.2,
+    "湖南": 34127.7,
+    "甘肃": 7642.6,
+    "福建": 34432.2,
+    "西藏": 1381.0,
+    "贵州": 14067.3,
+    "辽宁": 22105.4,
+    "重庆": 20260.8,
+    "陕西": 21776.1,
+    "青海": 2517.0,
+    "黑龙江": 12659.5
+  },
+  "2018": {
+    "上海": 37769.1,
+    "云南": 21427.5,
+    "内蒙古": 16252.9,
+    "北京": 35161.4,
+    "吉林": 11437.4,
+    "四川": 43539.0,
+    "天津": 13411.1,
+    "宁夏": 3580.6,
+    "安徽": 34377.3,
+    "山东": 67864.4,
+    "山西": 16153.1,
+    "广东": 101875.9,
+    "广西": 19951.7,
+    "新疆": 13110.1,
+    "江苏": 93456.3,
+    "江西": 23016.9,
+    "河北": 32947.0,
+    "河南": 50273.5,
+    "浙江": 59311.7,
+    "海南": 5004.2,
+    "湖北": 42425.5,
+    "湖南": 36629.3,
+    "甘肃": 8364.7,
+    "福建": 39204.8,
+    "西藏": 1583.5,
+    "贵州": 15886.6,
+    "辽宁": 24113.5,
+    "重庆": 21866.8,
+    "陕西": 24354.8,
+    "青海": 2799.9,
+    "黑龙江": 13205.7
+  },
+  "2019": {
+    "上海": 40241.2,
+    "云南": 23902.1,
+    "内蒙古": 17479.4,
+    "北京": 37767.0,
+    "吉林": 11949.4,
+    "四川": 47168.6,
+    "天津": 14097.2,
+    "宁夏": 3841.5,
+    "安徽": 37584.8,
+    "山东": 72024.3,
+    "山西": 17311.0,
+    "广东": 110468.1,
+    "广西": 21341.5,
+    "新疆": 14024.9,
+    "江苏": 99836.9,
+    "江西": 24724.0,
+    "河北": 35623.5,
+    "河南": 53739.3,
+    "浙江": 64632.0,
+    "海南": 5442.1,
+    "湖北": 45557.0,
+    "湖南": 39930.7,
+    "甘肃": 9053.3,
+    "福建": 42479.1,
+    "西藏": 1750.3,
+    "贵州": 17251.8,
+    "辽宁": 25665.9,
+    "重庆": 23689.6,
+    "陕西": 26214.5,
+    "青海": 3020.2,
+    "黑龙江": 13962.5
+  },
+  "2020": {
+    "上海": 41603.9,
+    "云南": 25214.5,
+    "内蒙古": 17623.4,
+    "北京": 38503.6,
+    "吉林": 12499.5,
+    "四川": 49445.1,
+    "天津": 14230.8,
+    "宁夏": 4036.2,
+    "安徽": 38628.8,
+    "山东": 74355.9,
+    "山西": 18202.7,
+    "广东": 113708.9,
+    "广西": 22250.7,
+    "新疆": 14262.2,
+    "江苏": 104566.6,
+    "江西": 25825.4,
+    "河北": 36821.5,
+    "河南": 54160.6,
+    "浙江": 67164.5,
+    "海南": 5640.8,
+    "湖北": 43017.6,
+    "湖南": 41693.7,
+    "甘肃": 9323.1,
+    "福建": 43682.0,
+    "西藏": 1956.5,
+    "贵州": 18308.3,
+    "辽宁": 25839.0,
+    "重庆": 25158.1,
+    "陕西": 26297.0,
+    "青海": 3080.6,
+    "黑龙江": 14000.1
+  },
+  "2021": {
+    "上海": 47059.4,
+    "云南": 27895.3,
+    "内蒙古": 21584.8,
+    "北京": 44350.7,
+    "吉林": 13431.1,
+    "四川": 55131.3,
+    "天津": 16093.2,
+    "宁夏": 4666.5,
+    "安徽": 43102.8,
+    "山东": 84838.0,
+    "山西": 23087.8,
+    "广东": 127577.4,
+    "广西": 25311.5,
+    "新疆": 16791.5,
+    "江苏": 119853.2,
+    "江西": 29838.2,
+    "河北": 41205.4,
+    "河南": 57806.9,
+    "浙江": 76765.3,
+    "海南": 6508.9,
+    "湖北": 50093.3,
+    "湖南": 45751.9,
+    "甘肃": 10608.0,
+    "福建": 49602.6,
+    "西藏": 2145.1,
+    "贵州": 19921.3,
+    "辽宁": 28471.0,
+    "重庆": 28092.5,
+    "陕西": 30476.6,
+    "青海": 3446.3,
+    "黑龙江": 15292.8
+  },
+  "2022": {
+    "上海": 48594.5,
+    "云南": 29301.1,
+    "内蒙古": 23795.7,
+    "北京": 45222.4,
+    "吉林": 13121.4,
+    "四川": 57609.4,
+    "天津": 16588.5,
+    "宁夏": 5168.1,
+    "安徽": 45525.1,
+    "山东": 89519.4,
+    "山西": 25653.2,
+    "广东": 132547.1,
+    "广西": 26419.7,
+    "新疆": 18550.5,
+    "江苏": 124564.2,
+    "江西": 31568.1,
+    "河北": 43198.3,
+    "河南": 58807.4,
+    "浙江": 80770.0,
+    "海南": 6912.8,
+    "湖北": 53445.4,
+    "湖南": 47957.9,
+    "甘肃": 11553.6,
+    "福建": 52099.6,
+    "西藏": 2235.4,
+    "贵州": 20579.5,
+    "辽宁": 29739.7,
+    "重庆": 28771.8,
+    "陕西": 33035.6,
+    "青海": 3677.4,
+    "黑龙江": 16359.2
+  },
+  "2023": {
+    "上海": 51404.5,
+    "云南": 30595.8,
+    "内蒙古": 25020.5,
+    "北京": 47353.7,
+    "吉林": 13942.7,
+    "四川": 61353.4,
+    "天津": 17211.8,
+    "宁夏": 5368.8,
+    "安徽": 48227.5,
+    "山东": 94206.4,
+    "山西": 26050.8,
+    "广东": 137905.4,
+    "广西": 27501.7,
+    "新疆": 19603.3,
+    "江苏": 130924.3,
+    "江西": 32677.1,
+    "河北": 45660.0,
+    "河南": 60627.7,
+    "浙江": 85619.6,
+    "海南": 7590.2,
+    "湖北": 56794.3,
+    "湖南": 50667.5,
+    "甘肃": 12345.7,
+    "福建": 54801.7,
+    "西藏": 2532.9,
+    "贵州": 21513.7,
+    "辽宁": 31389.8,
+    "重庆": 30614.3,
+    "陕西": 33976.5,
+    "青海": 3849.2,
+    "黑龙江": 16470.7
+  },
+  "2024": {
+    "上海": 53759.5,
+    "云南": 31423.4,
+    "内蒙古": 26337.0,
+    "北京": 49670.2,
+    "吉林": 14305.0,
+    "四川": 64537.9,
+    "天津": 17931.3,
+    "宁夏": 5520.2,
+    "安徽": 50646.7,
+    "山东": 98406.9,
+    "山西": 25353.5,
+    "广东": 141488.9,
+    "广西": 28694.1,
+    "新疆": 20492.4,
+    "江苏": 136696.9,
+    "江西": 34227.9,
+    "河北": 47448.1,
+    "河南": 63557.1,
+    "浙江": 90007.0,
+    "海南": 7972.7,
+    "湖北": 59644.3,
+    "湖南": 53084.7,
+    "甘肃": 13020.5,
+    "福建": 57476.6,
+    "西藏": 2789.1,
+    "贵州": 22645.7,
+    "辽宁": 32540.8,
+    "重庆": 32046.7,
+    "陕西": 35437.1,
+    "青海": 3965.5,
+    "黑龙江": 16478.1
+  }
+};
+
+var root = am5.Root.new("chartdiv");
+
+root.numberFormatter.setAll({
+  numberFormat: "#,###.#",
+});
+
+root.fontFamily = '"Microsoft YaHei", "PingFang SC", "Noto Sans SC", sans-serif';
+
+root.setThemes([am5themes_Animated.new(root)]);
+
+var chart = root.container.children.push(am5xy.XYChart.new(root, {
+  panX: true,
+  panY: true,
+  wheelX: "none",
+  wheelY: "none",
+  paddingLeft: 0,
+  paddingRight: 20,
+  layout: root.verticalLayout
+}));
+
+chart.zoomOutButton.set("forceHidden", true);
+
+var yRenderer = am5xy.AxisRendererY.new(root, {
+  minGridDistance: 24,
+  inversed: true,
+  minorGridEnabled: true
+});
+yRenderer.grid.template.set("visible", false);
+yRenderer.labels.template.setAll({
+  fontSize: 13,
+  fontWeight: "600",
+  fill: am5.color(0x4a5b6b)
+});
+
+var yAxis = chart.yAxes.push(am5xy.CategoryAxis.new(root, {
+  maxDeviation: 0,
+  categoryField: "province",
+  renderer: yRenderer
+}));
+
+var xRenderer = am5xy.AxisRendererX.new(root, {});
+xRenderer.labels.template.setAll({
+  fontSize: 11,
+  fill: am5.color(0x8899aa)
+});
+
+var xAxis = chart.xAxes.push(am5xy.ValueAxis.new(root, {
+  maxDeviation: 0,
+  min: 0,
+  strictMinMax: true,
+  extraMax: 0.15,
+  renderer: xRenderer
+}));
+xAxis.set("interpolationDuration", 1500 / 10);
+xAxis.set("interpolationEasing", am5.ease.linear);
+
+var series = chart.series.push(am5xy.ColumnSeries.new(root, {
+  xAxis: xAxis,
+  yAxis: yAxis,
+  valueXField: "value",
+  categoryYField: "province"
+}));
+
+series.columns.template.setAll({
+  cornerRadiusBR: 4,
+  cornerRadiusTR: 4,
+  strokeOpacity: 0
+});
+
+series.columns.template.adapters.add("fill", function(fill, target) {
+  return chart.get("colors").getIndex(series.columns.indexOf(target));
+});
+
+series.bullets.push(function() {
+  return am5.Bullet.new(root, {
+    locationX: 1,
+    sprite: am5.Label.new(root, {
+      text: "{valueXWorking.formatNumber('#,###.#')}",
+      fill: am5.color(0x3a4a5a),
+      fontSize: 12,
+      fontWeight: "500",
+      centerX: am5.p100,
+      centerY: am5.p50,
+      populateText: true
+    })
+  });
+});
+
+var yearLabel = chart.plotContainer.children.push(am5.Label.new(root, {
+  text: "2011",
+  fontSize: "7em",
+  opacity: 0.12,
+  x: am5.p100,
+  y: am5.p100,
+  centerY: am5.p100,
+  centerX: am5.p100,
+  fill: am5.color(0x4a5b6b)
+}));
+
+var stepDuration = 1500;
+var years = [2011, 2012, 2013, 2014, 2015, 2016, 2017, 2018, 2019, 2020, 2021, 2022, 2023, 2024];
+var yearIndex = 0;
+
+function getSeriesItem(category) {
+  for (var i = 0; i < series.dataItems.length; i++) {
+    if (series.dataItems[i].get("categoryY") == category) {
+      return series.dataItems[i];
+    }
+  }
+}
+
+function sortCategoryAxis() {
+  series.dataItems.sort(function(x, y) {
+    return y.get("valueX") - x.get("valueX");
+  });
+
+  am5.array.each(yAxis.dataItems, function(dataItem) {
+    var seriesDataItem = getSeriesItem(dataItem.get("category"));
+    if (seriesDataItem) {
+      var index = series.dataItems.indexOf(seriesDataItem);
+      var deltaPosition = (index - dataItem.get("index", 0)) / series.dataItems.length;
+      if (dataItem.get("index") != index) {
+        dataItem.set("index", index);
+        dataItem.set("deltaPosition", -deltaPosition);
+        dataItem.animate({
+          key: "deltaPosition",
+          to: 0,
+          duration: stepDuration / 2,
+          easing: am5.ease.out(am5.ease.cubic)
+        });
+      }
+    }
+  });
+
+  yAxis.dataItems.sort(function(x, y) {
+    return x.get("index") - y.get("index");
+  });
+}
+
+function updateData() {
+  var year = years[yearIndex];
+  if (!allData[year]) return;
+
+  yearLabel.set("text", year.toString());
+
+  var itemsWithNonZero = 0;
+  am5.array.each(series.dataItems, function(dataItem) {
+    var category = dataItem.get("categoryY");
+    var value = allData[year][category] || 0;
+    if (value > 0) itemsWithNonZero++;
+    dataItem.animate({
+      key: "valueX",
+      to: value,
+      duration: stepDuration,
+      easing: am5.ease.linear
+    });
+    dataItem.animate({
+      key: "valueXWorking",
+      to: value,
+      duration: stepDuration,
+      easing: am5.ease.linear
+    });
+  });
+
+  yAxis.zoom(0, Math.min(15, itemsWithNonZero) / yAxis.dataItems.length);
+
+  yearIndex++;
+  if (yearIndex >= years.length) {
+    yearIndex = 0;
+  }
+}
+
+function setInitialData() {
+  var year = years[0];
+  var d = allData[year];
+  for (var n in d) {
+    series.data.push({ province: n, value: d[n] });
+    yAxis.data.push({ province: n });
+  }
+}
+
+setInitialData();
+
+setTimeout(function() {
+  yearIndex = 1;
+  updateData();
+}, 100);
+
+var dataInterval = setInterval(updateData, stepDuration);
+var sortInterval = setInterval(sortCategoryAxis, 100);
+
+series.appear(1000);
+chart.appear(1000, 100);
+
+window.addEventListener("resize", function() {
+  root.resize();
+});
+</script>
+</body>
+</html>
