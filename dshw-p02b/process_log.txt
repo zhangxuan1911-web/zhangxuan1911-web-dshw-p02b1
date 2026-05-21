@@ -1,0 +1,44 @@
+=== Process Log: 02_clean_construct_variables.ipynb ===
+Started at: 2026-05-20 22:22:43
+
+[2026-05-20 22:22:43] Notebook 2 started
+[2026-05-20 22:24:39] 资产负债表: early=64164 rows, late=81663 rows, merged=145827 rows
+[2026-05-20 22:24:39]   过滤元数据行: 145827 → 145825 rows
+[2026-05-20 22:27:31] 利润表: early=64164 rows, late=81663 rows, merged=145827 rows
+[2026-05-20 22:27:32]   过滤元数据行: 145827 → 145825 rows
+[2026-05-20 22:28:26] CSMAR常用变量: 61456 rows, 33 cols
+[2026-05-20 22:30:12] 基本信息年度表: 64171 rows
+[2026-05-20 22:30:12]   上市年份映射: 5613 unique firms
+[2026-05-20 22:30:13] 清洗完成: BS=145825, IS=145825, CC=61456
+[2026-05-20 22:30:13]   BS: no duplicates
+[2026-05-20 22:30:13]   IS: no duplicates
+[2026-05-20 22:30:13]   CC: no duplicates
+[2026-05-20 22:30:23] Cleaned tables saved to data/clean/
+[2026-05-20 22:30:24] 面板数据合并完成: 145825 rows, 15 cols
+[2026-05-20 22:30:26] panel 已保存到 disk，后续可跳过前序步骤直接加载
+[2026-05-20 22:30:26]   FS_Comins-B002000000: 49.2% non-missing
+[2026-05-20 22:30:26]   Shrcr1: 39.6% non-missing
+[2026-05-20 22:30:26]   Shrhfd5: 39.6% non-missing
+[2026-05-20 22:30:26]   listing_year: 96.1% non-missing
+[2026-05-20 22:33:10]   Dropped 74038 rows with total_assets <= 0 (or NaN)
+[2026-05-20 22:33:10] Column rename complete — 71787 rows ready for variable construction
+[2026-05-20 22:33:17] Lev constructed, available from 2000, mean=0.5006
+[2026-05-20 22:33:19] SL constructed, available from 2000, mean=0.3975
+[2026-05-20 22:33:21] LL constructed, available from 2000, mean=0.0979
+[2026-05-20 22:33:22] SDR constructed, available from 2000, mean=0.8210
+[2026-05-20 22:33:24] Cash constructed, available from 2000, mean=0.1856
+[2026-05-20 22:33:26] ROA constructed, available from 2000, mean=0.3324
+[2026-05-20 22:33:28] ROE constructed, available from 2000, mean=0.0790
+[2026-05-20 22:33:29] SLoan constructed, available from 2000, mean=0.1305
+[2026-05-20 22:33:32] SLoan constructed, available from 2000, mean=0.1305
+[2026-05-20 22:33:36] LLoan constructed, available from 2000, mean=0.0623
+[2026-05-20 22:33:38] Top1 constructed, available from 2003, mean=34.3953
+[2026-05-20 22:33:40] HHI5 constructed, available from 2003, mean=0.1625
+[2026-05-20 22:33:41] Size constructed, available from 2000, mean=21.9730
+[2026-05-20 22:33:43] Age constructed, available from 2000, mean=10.4
+[2026-05-20 22:33:45] 变量字典更新: 256 rows (was 218, +13 constructed)
+[2026-05-20 22:33:50] Winsorized 10 variables at 1%/99% by year
+[2026-05-20 22:33:54] 最终面板: 71787 firm-year obs, 16 vars
+[2026-05-20 22:33:54]   年份范围: 2000–2024
+[2026-05-20 22:33:54]   公司数量: 5820
+[2026-05-20 22:33:58] Notebook 2 completed successfully

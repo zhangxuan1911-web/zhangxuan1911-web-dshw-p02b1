@@ -1,0 +1,23 @@
+# Data files
+data/data_raw_zip/
+data/raw/
+data/temp/
+
+# Database
+*.db
+
+# Jupyter checkpoints
+.ipynb_checkpoints/
+
+# Python cache
+__pycache__/
+*.pyc
+*.pyo
+
+# OS
+.DS_Store
+Thumbs.db
+
+# IDE
+.vscode/
+.idea/
