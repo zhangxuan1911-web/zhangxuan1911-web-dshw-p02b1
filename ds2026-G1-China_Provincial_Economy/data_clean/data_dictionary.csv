@@ -1,7 +1,0 @@
-﻿variable,description,source
-province,省份名称（标准化简写）,国家统计局
-year,年份,国家统计局
-gdp,地区生产总值（亿元）,国家统计局
-gdp_growth,GDP同比增速（%）,计算派生
-region,地区分类（东部/东北/中部/西部）,国家统计局
-gdp_100m,地区生产总值（亿元，宽表用）,国家统计局
